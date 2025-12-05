@@ -7,10 +7,10 @@ const Footer = () => {
         <div className="flex flex-col items-center gap-4">
           <p className="font-script text-3xl text-primary">Dulce Mío</p>
           <p className="flex items-center gap-2 text-muted-foreground text-sm">
-            Hecho con <Heart className="w-4 h-4 text-primary fill-primary" /> en Israel
+            Made with <Heart className="w-4 h-4 text-primary fill-primary" /> in Israel
           </p>
           <p className="text-muted-foreground text-sm">
-            © {new Date().getFullYear()} Dulce Mío Cookies. Todos los derechos reservados.
+            © {new Date().getFullYear()} Dulce Mío Cookies. All rights reserved.
           </p>
         </div>
       </div>
