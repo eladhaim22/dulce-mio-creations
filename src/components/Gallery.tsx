@@ -1,23 +1,22 @@
 import heroCookies from "@/assets/hero-cookies.jpg";
 
 const Gallery = () => {
-  // Using the hero image as placeholder - user will add their photos
   const images = [
-    { src: heroCookies, alt: "Galletas decoradas rosa" },
-    { src: heroCookies, alt: "Galletas de temporada" },
-    { src: heroCookies, alt: "Galletas personalizadas" },
-    { src: heroCookies, alt: "Taller de galletas" },
+    { src: heroCookies, alt: "Pink decorated cookies" },
+    { src: heroCookies, alt: "Seasonal cookies" },
+    { src: heroCookies, alt: "Custom cookies" },
+    { src: heroCookies, alt: "Cookie workshop" },
   ];
 
   return (
-    <section id="galeria" className="section-padding bg-card">
+    <section id="gallery" className="section-padding bg-card">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <span className="inline-block text-primary font-medium mb-4 tracking-wider uppercase text-sm">
-            Galería
+            Gallery
           </span>
           <h2 className="font-display text-4xl md:text-5xl text-foreground">
-            Mis <span className="font-script text-primary">Creaciones</span>
+            My <span className="font-script text-primary">Creations</span>
           </h2>
         </div>
 

@@ -3,34 +3,34 @@ import { Cookie, Cake, GraduationCap } from "lucide-react";
 const services = [
   {
     icon: Cookie,
-    title: "Galletas Decoradas",
-    description: "Galletas artesanales decoradas con royal icing para cualquier ocasión: cumpleaños, bodas, baby showers y más.",
+    title: "Decorated Cookies",
+    description: "Handcrafted cookies decorated with royal icing for any occasion: birthdays, weddings, baby showers, and more.",
     color: "peach",
   },
   {
     icon: Cake,
-    title: "Pasteles",
-    description: "Pasteles personalizados que no solo son deliciosos sino también obras de arte comestibles para tu celebración especial.",
+    title: "Custom Cakes",
+    description: "Personalized cakes that are not only delicious but also edible works of art for your special celebration.",
     color: "rose",
   },
   {
     icon: GraduationCap,
-    title: "Talleres",
-    description: "Aprende el arte de decorar galletas en mis talleres especiales de temporada. Perfecto para holidays y eventos.",
+    title: "Workshops",
+    description: "Learn the art of cookie decorating in my special seasonal workshops. Perfect for holidays and events.",
     color: "mint",
   },
 ];
 
 const Services = () => {
   return (
-    <section id="servicios" className="section-padding">
+    <section id="services" className="section-padding">
       <div className="container mx-auto">
         <div className="text-center mb-16">
           <span className="inline-block text-primary font-medium mb-4 tracking-wider uppercase text-sm">
-            Servicios
+            Services
           </span>
           <h2 className="font-display text-4xl md:text-5xl text-foreground">
-            Lo Que <span className="font-script text-primary">Ofrezco</span>
+            What I <span className="font-script text-primary">Offer</span>
           </h2>
         </div>
 
