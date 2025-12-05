@@ -2,49 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Quicksand:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
 
 @layer base {
   :root {
-    --background: 30 50% 98%;
-    --foreground: 25 30% 25%;
+    --background: 30 30% 98%;
+    --foreground: 20 15% 25%;
 
-    --card: 30 40% 96%;
-    --card-foreground: 25 30% 25%;
+    --card: 30 25% 96%;
+    --card-foreground: 20 15% 25%;
 
-    --popover: 30 50% 98%;
-    --popover-foreground: 25 30% 25%;
+    --popover: 30 30% 98%;
+    --popover-foreground: 20 15% 25%;
 
-    --primary: 12 60% 70%;
-    --primary-foreground: 30 50% 98%;
+    --primary: 350 35% 65%;
+    --primary-foreground: 30 30% 98%;
 
-    --secondary: 340 45% 85%;
-    --secondary-foreground: 25 30% 25%;
+    --secondary: 30 25% 88%;
+    --secondary-foreground: 20 15% 25%;
 
-    --muted: 30 30% 92%;
-    --muted-foreground: 25 20% 45%;
+    --muted: 30 20% 92%;
+    --muted-foreground: 20 10% 50%;
 
-    --accent: 160 30% 75%;
-    --accent-foreground: 25 30% 25%;
+    --accent: 45 30% 85%;
+    --accent-foreground: 20 15% 25%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 30% 88%;
-    --input: 30 30% 88%;
-    --ring: 12 60% 70%;
+    --border: 30 20% 90%;
+    --input: 30 20% 90%;
+    --ring: 350 35% 65%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
 
-    /* Custom colors */
-    --peach: 12 60% 70%;
-    --peach-light: 12 70% 92%;
-    --rose: 340 45% 75%;
-    --rose-light: 340 50% 92%;
-    --cream: 40 50% 96%;
-    --mint: 160 30% 75%;
-    --mint-light: 160 40% 92%;
-    --chocolate: 25 40% 30%;
+    /* Custom elegant colors */
+    --dusty-rose: 350 35% 65%;
+    --dusty-rose-light: 350 40% 94%;
+    --blush: 15 40% 88%;
+    --blush-light: 15 45% 95%;
+    --cream: 40 40% 96%;
+    --sage: 140 15% 70%;
+    --sage-light: 140 20% 92%;
+    --taupe: 30 15% 45%;
+    --warm-brown: 20 20% 30%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -57,25 +58,25 @@
   }
 
   .dark {
-    --background: 25 30% 10%;
-    --foreground: 30 50% 98%;
-    --card: 25 30% 12%;
-    --card-foreground: 30 50% 98%;
-    --popover: 25 30% 10%;
-    --popover-foreground: 30 50% 98%;
-    --primary: 12 60% 70%;
-    --primary-foreground: 25 30% 10%;
-    --secondary: 340 45% 25%;
-    --secondary-foreground: 30 50% 98%;
-    --muted: 25 30% 20%;
-    --muted-foreground: 30 30% 70%;
-    --accent: 160 30% 35%;
-    --accent-foreground: 30 50% 98%;
+    --background: 20 15% 10%;
+    --foreground: 30 30% 98%;
+    --card: 20 15% 12%;
+    --card-foreground: 30 30% 98%;
+    --popover: 20 15% 10%;
+    --popover-foreground: 30 30% 98%;
+    --primary: 350 35% 65%;
+    --primary-foreground: 20 15% 10%;
+    --secondary: 20 15% 20%;
+    --secondary-foreground: 30 30% 98%;
+    --muted: 20 15% 20%;
+    --muted-foreground: 30 20% 70%;
+    --accent: 45 20% 25%;
+    --accent-foreground: 30 30% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 25 30% 20%;
-    --input: 25 30% 20%;
-    --ring: 12 60% 70%;
+    --border: 20 15% 20%;
+    --input: 20 15% 20%;
+    --ring: 350 35% 65%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -93,43 +94,43 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body;
+    @apply bg-background text-foreground font-body antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display;
+    @apply font-display tracking-wide;
   }
 }
 
 @layer components {
   .font-script {
-    font-family: 'Dancing Script', cursive;
+    font-family: 'Great Vibes', cursive;
   }
 
   .font-display {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Cormorant Garamond', serif;
   }
 
   .font-body {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
 
   .text-gradient {
-    @apply bg-gradient-to-r from-primary via-rose to-primary bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-primary via-dusty-rose to-primary bg-clip-text text-transparent;
   }
 
   .card-hover {
-    @apply transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+    @apply transition-all duration-500 ease-out hover:shadow-lg hover:-translate-y-1;
   }
 
   .section-padding {
-    @apply py-16 md:py-24 px-4;
+    @apply py-20 md:py-28 px-4;
   }
 }
 
 @layer utilities {
   .animate-float {
-    animation: float 6s ease-in-out infinite;
+    animation: float 8s ease-in-out infinite;
   }
 
   @keyframes float {
@@ -137,18 +138,18 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-10px);
+      transform: translateY(-12px);
     }
   }
 
   .animate-fade-up {
-    animation: fadeUp 0.6s ease-out forwards;
+    animation: fadeUp 0.8s ease-out forwards;
   }
 
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(30px);
     }
     to {
       opacity: 1;
