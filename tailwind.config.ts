@@ -14,9 +14,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        script: ["Dancing Script", "cursive"],
-        display: ["Playfair Display", "serif"],
-        body: ["Quicksand", "sans-serif"],
+        script: ["Great Vibes", "cursive"],
+        display: ["Cormorant Garamond", "serif"],
+        body: ["Lato", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -52,20 +52,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        peach: {
-          DEFAULT: "hsl(var(--peach))",
-          light: "hsl(var(--peach-light))",
+        "dusty-rose": {
+          DEFAULT: "hsl(var(--dusty-rose))",
+          light: "hsl(var(--dusty-rose-light))",
         },
-        rose: {
-          DEFAULT: "hsl(var(--rose))",
-          light: "hsl(var(--rose-light))",
+        blush: {
+          DEFAULT: "hsl(var(--blush))",
+          light: "hsl(var(--blush-light))",
         },
         cream: "hsl(var(--cream))",
-        mint: {
-          DEFAULT: "hsl(var(--mint))",
-          light: "hsl(var(--mint-light))",
+        sage: {
+          DEFAULT: "hsl(var(--sage))",
+          light: "hsl(var(--sage-light))",
         },
-        chocolate: "hsl(var(--chocolate))",
+        taupe: "hsl(var(--taupe))",
+        "warm-brown": "hsl(var(--warm-brown))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

@@ -12,20 +12,20 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border/50">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border/30">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <a href="#" className="font-script text-2xl text-primary">
+        <div className="flex items-center justify-between h-18 py-4">
+          <a href="#" className="font-script text-3xl text-primary">
             Dulce Mío
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="text-foreground hover:text-primary transition-colors duration-300 font-medium text-sm tracking-wide"
               >
                 {link.label}
               </a>
@@ -44,13 +44,13 @@ const Navbar = () => {
 
         {/* Mobile nav */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="md:hidden py-6 border-t border-border/30">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block py-3 text-foreground hover:text-primary transition-colors font-medium"
+                className="block py-3 text-foreground hover:text-primary transition-colors duration-300 font-medium tracking-wide"
               >
                 {link.label}
               </a>
