@@ -1,4 +1,4 @@
-import { Phone, Mail, Instagram, Facebook } from "lucide-react";
+import { Phone, Mail, Instagram, Facebook, MessageCircle } from "lucide-react";
 
 const Contact = () => {
   return (
@@ -43,21 +43,30 @@ const Contact = () => {
             </a>
           </div>
 
-          <div className="flex justify-center gap-5">
+          <div className="flex justify-center gap-4 sm:gap-5">
+            <a 
+              href="https://wa.me/972509052322" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="w-12 sm:w-14 h-12 sm:h-14 bg-[#25D366] rounded-full flex items-center justify-center text-white hover:bg-[#22c55e] hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
+              aria-label="Contact us on WhatsApp"
+            >
+              <MessageCircle className="w-5 h-5" />
+            </a>
             <a 
               href="https://instagram.com/dulcemiocookies" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-14 h-14 bg-primary/90 rounded-full flex items-center justify-center text-primary-foreground hover:bg-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
+              className="w-12 sm:w-14 h-12 sm:h-14 bg-primary/90 rounded-full flex items-center justify-center text-primary-foreground hover:bg-primary hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
               aria-label="Follow us on Instagram"
             >
               <Instagram className="w-5 h-5" />
             </a>
             <a 
-              href="https://facebook.com/dulcemiocookies" 
+              href="https://www.facebook.com/profile.php?id=61576aborele828" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-14 h-14 bg-taupe/80 rounded-full flex items-center justify-center text-primary-foreground hover:bg-taupe hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
+              className="w-12 sm:w-14 h-12 sm:h-14 bg-taupe/80 rounded-full flex items-center justify-center text-primary-foreground hover:bg-taupe hover:shadow-lg hover:-translate-y-1 transition-all duration-500"
               aria-label="Follow us on Facebook"
             >
               <Facebook className="w-5 h-5" />
