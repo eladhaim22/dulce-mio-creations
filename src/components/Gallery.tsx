@@ -1,11 +1,16 @@
-import heroCookies from "@/assets/hero-cookies.jpg";
+import gallery1 from "@/assets/gallery-1.jpeg";
+import gallery2 from "@/assets/gallery-2.jpeg";
+import gallery3 from "@/assets/gallery-3.jpeg";
+import gallery4 from "@/assets/gallery-4.jpeg";
+import gallery5 from "@/assets/gallery-5.jpeg";
 
 const Gallery = () => {
   const images = [
-    { src: heroCookies, alt: "Pink decorated cookies" },
-    { src: heroCookies, alt: "Seasonal cookies" },
-    { src: heroCookies, alt: "Custom cookies" },
-    { src: heroCookies, alt: "Cookie workshop" },
+    { src: gallery1, alt: "Gremlin popcorn cake" },
+    { src: gallery2, alt: "Christmas elf cake" },
+    { src: gallery3, alt: "Magician birthday cake" },
+    { src: gallery4, alt: "Brawl Stars character cake" },
+    { src: gallery5, alt: "Unicorn decorated cookies" },
   ];
 
   return (
@@ -20,7 +25,7 @@ const Gallery = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {images.map((image, index) => (
             <div 
               key={index}
@@ -32,7 +37,7 @@ const Gallery = () => {
                 src={image.src} 
                 alt={image.alt}
                 className={`w-full object-cover transition-transform duration-700 hover:scale-105 ${
-                  index === 0 ? "h-full min-h-[420px]" : "h-48 md:h-56"
+                  index === 0 ? "h-full min-h-[420px]" : "h-48 md:h-64"
                 }`}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
