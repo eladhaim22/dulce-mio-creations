@@ -1,5 +1,5 @@
 import { Heart } from "lucide-react";
-import heroCookies from "@/assets/hero-cookies.jpg";
+import gallery1 from "@/assets/gallery-1.jpeg";
 
 const Hero = () => {
   return (
@@ -45,8 +45,8 @@ const Hero = () => {
           <div className="relative animate-fade-up" style={{ animationDelay: "0.3s" }}>
             <div className="relative rounded-[2rem] overflow-hidden shadow-2xl">
               <img 
-                src={heroCookies} 
-                alt="Handcrafted decorated cookies by Dulce Mío" 
+                src={gallery1} 
+                alt="Handcrafted Gremlin cake by Dulce Mío"
                 className="w-full h-[520px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/20 to-transparent" />
