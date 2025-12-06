@@ -15,30 +15,30 @@ const Contact = () => {
             Ready to sweeten your next event? Contact me and let's create something special together.
           </p>
 
-          <div className="grid sm:grid-cols-2 gap-6 mb-14">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-14">
             <a 
               href="tel:0509052322"
-              className="flex items-center justify-center gap-4 p-7 rounded-2xl bg-card border border-border/30 card-hover group"
+              className="flex items-center justify-center gap-3 sm:gap-4 p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-card border border-border/30 card-hover group"
             >
-              <div className="w-14 h-14 bg-dusty-rose-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <Phone className="w-6 h-6 text-primary" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 bg-dusty-rose-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shrink-0">
+                <Phone className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
               </div>
               <div className="text-left">
                 <p className="text-xs text-muted-foreground tracking-wide uppercase">Phone</p>
-                <p className="font-display text-lg text-foreground font-medium">050-905-2322</p>
+                <p className="font-display text-base sm:text-lg text-foreground font-medium">050-905-2322</p>
               </div>
             </a>
 
             <a 
               href="mailto:dulcemiocookies@gmail.com"
-              className="flex items-center justify-center gap-4 p-7 rounded-2xl bg-card border border-border/30 card-hover group"
+              className="flex items-center justify-center gap-3 sm:gap-4 p-5 sm:p-7 rounded-xl sm:rounded-2xl bg-card border border-border/30 card-hover group"
             >
-              <div className="w-14 h-14 bg-blush-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                <Mail className="w-6 h-6 text-taupe" />
+              <div className="w-12 sm:w-14 h-12 sm:h-14 bg-blush-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shrink-0">
+                <Mail className="w-5 sm:w-6 h-5 sm:h-6 text-taupe" />
               </div>
-              <div className="text-left">
+              <div className="text-left min-w-0">
                 <p className="text-xs text-muted-foreground tracking-wide uppercase">Email</p>
-                <p className="font-display text-lg text-foreground font-medium">dulcemiocookies@gmail.com</p>
+                <p className="font-display text-sm sm:text-lg text-foreground font-medium truncate">dulcemiocookies@gmail.com</p>
               </div>
             </a>
           </div>

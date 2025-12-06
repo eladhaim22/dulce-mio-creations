@@ -18,24 +18,24 @@ const About = () => {
             sweetest moments deserve to be celebrated with something special.
           </p>
           
-          <div className="grid grid-cols-3 gap-6 mt-14">
-            <div className="text-center p-8 rounded-2xl bg-background card-hover border border-border/30">
-              <div className="w-16 h-16 bg-dusty-rose-light rounded-full flex items-center justify-center mx-auto mb-5">
-                <Heart className="w-7 h-7 text-primary" />
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mt-10 sm:mt-14">
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-background card-hover border border-border/30">
+              <div className="w-12 sm:w-16 h-12 sm:h-16 bg-dusty-rose-light rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5">
+                <Heart className="w-5 sm:w-7 h-5 sm:h-7 text-primary" />
               </div>
-              <p className="font-display text-lg text-foreground font-medium">Made with Love</p>
+              <p className="font-display text-base sm:text-lg text-foreground font-medium">Made with Love</p>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-background card-hover border border-border/30">
-              <div className="w-16 h-16 bg-blush-light rounded-full flex items-center justify-center mx-auto mb-5">
-                <Sparkles className="w-7 h-7 text-taupe" />
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-background card-hover border border-border/30">
+              <div className="w-12 sm:w-16 h-12 sm:h-16 bg-blush-light rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5">
+                <Sparkles className="w-5 sm:w-7 h-5 sm:h-7 text-taupe" />
               </div>
-              <p className="font-display text-lg text-foreground font-medium">Unique Designs</p>
+              <p className="font-display text-base sm:text-lg text-foreground font-medium">Unique Designs</p>
             </div>
-            <div className="text-center p-8 rounded-2xl bg-background card-hover border border-border/30">
-              <div className="w-16 h-16 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-5">
-                <Star className="w-7 h-7 text-sage" />
+            <div className="text-center p-6 sm:p-8 rounded-2xl bg-background card-hover border border-border/30">
+              <div className="w-12 sm:w-16 h-12 sm:h-16 bg-sage-light rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5">
+                <Star className="w-5 sm:w-7 h-5 sm:h-7 text-sage" />
               </div>
-              <p className="font-display text-lg text-foreground font-medium">Premium Quality</p>
+              <p className="font-display text-base sm:text-lg text-foreground font-medium">Premium Quality</p>
             </div>
           </div>
         </div>

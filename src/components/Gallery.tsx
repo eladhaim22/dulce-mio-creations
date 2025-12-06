@@ -25,9 +25,9 @@ const Gallery = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
           {/* Big photo on the left */}
-          <div className="relative overflow-hidden rounded-2xl card-hover h-[400px] md:h-[500px]">
+          <div className="relative overflow-hidden rounded-xl sm:rounded-2xl card-hover h-[280px] sm:h-[350px] md:h-[500px]">
             <img 
               src={images[0].src} 
               alt={images[0].alt}
@@ -37,11 +37,11 @@ const Gallery = () => {
           </div>
 
           {/* Smaller photos on the right */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {images.slice(1).map((image, index) => (
               <div 
                 key={index}
-                className="relative overflow-hidden rounded-2xl card-hover h-[190px] md:h-[242px]"
+                className="relative overflow-hidden rounded-xl sm:rounded-2xl card-hover h-[130px] sm:h-[168px] md:h-[242px]"
               >
                 <img 
                   src={image.src} 
