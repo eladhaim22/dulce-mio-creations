@@ -25,20 +25,18 @@ const Gallery = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[280px]">
           {images.map((image, index) => (
             <div 
               key={index}
               className={`relative overflow-hidden rounded-2xl card-hover ${
-                index === 0 ? "col-span-2 row-span-2" : ""
+                index === 0 ? "md:col-span-2 md:row-span-2" : ""
               }`}
             >
               <img 
                 src={image.src} 
                 alt={image.alt}
-                className={`w-full object-cover transition-transform duration-700 hover:scale-105 ${
-                  index === 0 ? "h-full min-h-[420px]" : "h-48 md:h-64"
-                }`}
+                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
             </div>
