@@ -25,22 +25,33 @@ const Gallery = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[280px]">
-          {images.map((image, index) => (
-            <div 
-              key={index}
-              className={`relative overflow-hidden rounded-2xl card-hover ${
-                index === 0 ? "md:col-span-2 md:row-span-2" : ""
-              }`}
-            >
-              <img 
-                src={image.src} 
-                alt={image.alt}
-                className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
-            </div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Big photo on the left */}
+          <div className="relative overflow-hidden rounded-2xl card-hover h-[400px] md:h-[500px]">
+            <img 
+              src={images[0].src} 
+              alt={images[0].alt}
+              className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
+          </div>
+
+          {/* Smaller photos on the right */}
+          <div className="grid grid-cols-2 gap-4">
+            {images.slice(1).map((image, index) => (
+              <div 
+                key={index}
+                className="relative overflow-hidden rounded-2xl card-hover h-[190px] md:h-[242px]"
+              >
+                <img 
+                  src={image.src} 
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
