@@ -3,47 +3,51 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   :root {
     --background: 30 30% 98%;
-    --foreground: 20 15% 25%;
+    --foreground: 20 18% 20%;
 
     --card: 30 25% 96%;
-    --card-foreground: 20 15% 25%;
+    --card-foreground: 20 18% 20%;
 
     --popover: 30 30% 98%;
-    --popover-foreground: 20 15% 25%;
+    --popover-foreground: 20 18% 20%;
 
-    --primary: 350 35% 65%;
+    --primary: 350 38% 55%;
     --primary-foreground: 30 30% 98%;
 
     --secondary: 30 25% 88%;
-    --secondary-foreground: 20 15% 25%;
+    --secondary-foreground: 20 18% 20%;
 
     --muted: 30 20% 92%;
-    --muted-foreground: 20 10% 50%;
+    --muted-foreground: 20 15% 36%;
 
     --accent: 45 30% 85%;
-    --accent-foreground: 20 15% 25%;
+    --accent-foreground: 20 18% 20%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 30 20% 90%;
     --input: 30 20% 90%;
-    --ring: 350 35% 65%;
+    --ring: 350 38% 55%;
 
     --radius: 0.75rem;
 
     /* Custom elegant colors */
-    --dusty-rose: 350 35% 65%;
+    --dusty-rose: 350 38% 55%;
     --dusty-rose-light: 350 40% 94%;
     --blush: 15 40% 88%;
     --blush-light: 15 45% 95%;
     --cream: 40 40% 96%;
-    --sage: 140 15% 70%;
+    --sage: 140 18% 48%;
     --sage-light: 140 20% 92%;
-    --taupe: 30 15% 45%;
-    --warm-brown: 20 20% 30%;
+    --taupe: 25 18% 34%;
+    --warm-brown: 20 22% 24%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -92,7 +96,7 @@
   }
 
   body {
-    @apply bg-background text-foreground font-body antialiased;
+    @apply bg-background text-foreground font-body antialiased selection:bg-primary/20 selection:text-foreground;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -118,11 +122,15 @@
   }
 
   .card-hover {
-    @apply transition-all duration-500 ease-out hover:shadow-lg hover:-translate-y-1;
+    @apply transition-all duration-500 ease-out hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1.5;
   }
 
   .section-padding {
-    @apply py-12 sm:py-16 md:py-28 px-4;
+    @apply py-14 sm:py-20 md:py-28 px-4;
+  }
+
+  .bg-linen-grain {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.028'/%3E%3C/svg%3E");
   }
 }
 
@@ -136,7 +144,7 @@
       transform: translateY(0);
     }
     50% {
-      transform: translateY(-12px);
+      transform: translateY(-10px);
     }
   }
 
@@ -147,11 +155,81 @@
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(30px);
+      transform: translateY(28px);
     }
     to {
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .animate-marquee {
+    animation: marquee 32s linear infinite;
+  }
+
+  .animate-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-spin-slow {
+    animation: spin 24s linear infinite;
+  }
+
+  .animate-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animate-shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.28),
+      transparent
+    );
+    animation: shimmer 3.5s infinite;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-sprinkle {
+    animation: sprinkleBurst 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  @keyframes sprinkleBurst {
+    0% {
+      opacity: 1;
+      transform: translate(0, 0) scale(0.5) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(var(--tx), var(--ty)) scale(1.1) rotate(var(--rot));
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-marquee,
+  .animate-spin-slow,
+  .animate-shimmer::after {
+    animation: none !important;
   }
 }
