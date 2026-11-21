@@ -26,17 +26,19 @@ const Hero = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start px-4 lg:px-0">
               <a 
-                href="#contact" 
+                href="https://wa.me/972509052322"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium tracking-wide hover:bg-primary/90 transition-all duration-500 hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base"
               >
                 <Heart className="w-4 h-4" />
-                Contact Me
+                Order on WhatsApp
               </a>
               <a 
-                href="#services" 
+                href="#gallery" 
                 className="inline-flex items-center justify-center gap-2 border border-primary/40 text-foreground px-6 sm:px-8 py-3 sm:py-4 rounded-full font-medium tracking-wide hover:bg-primary/5 transition-all duration-500 text-sm sm:text-base"
               >
-                View Services
+                View Creations
               </a>
             </div>
           </div>
