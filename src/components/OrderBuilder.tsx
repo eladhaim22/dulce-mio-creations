@@ -1,22 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Sparkles, Send, Heart } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-
-const occasions = [
-  "Birthday",
-  "Wedding / Engagement",
-  "Baby Shower",
-  "Holiday",
-  "Workshop",
-  "Just Because",
-];
-
-const creationTypes = [
-  "Decorated Cookies",
-  "Custom Cake",
-  "Cookies & Cake Set",
-  "Decorating Workshop",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getTranslations } from "@/i18n/translations";
 
 interface Sprinkle {
   id: number;
@@ -29,15 +15,20 @@ interface Sprinkle {
 const sprinkleColors = ["#d48c98", "#ecc5b5", "#a3bfa8", "#f3d5c0", "#c97a89"];
 
 const OrderBuilder = () => {
-  const [occasion, setOccasion] = useState("Birthday");
-  const [creation, setCreation] = useState("Decorated Cookies");
+  const { lang } = useLanguage();
+  const t = getTranslations(lang).order;
+
+  const [occasion, setOccasion] = useState<string>(t.occasions[0]);
+  const [creation, setCreation] = useState<string>(t.creations[0]);
   const [details, setDetails] = useState("");
   const [sprinkles, setSprinkles] = useState<Sprinkle[]>([]);
 
-  const composedMessage = `Hi Dulce Mío! I'd love to plan a sweet order:\n• Occasion: ${occasion}\n• Looking for: ${creation}${
-    details.trim() ? `\n• Theme / Date / Details: ${details.trim()}` : ""
-  }`;
+  useEffect(() => {
+    setOccasion(t.occasions[0]);
+    setCreation(t.creations[0]);
+  }, [lang, t]);
 
+  const composedMessage = t.buildMessage(occasion, creation, details);
   const whatsappUrl = `https://wa.me/972509052322?text=${encodeURIComponent(composedMessage)}`;
 
   const triggerSprinkles = () => {
@@ -66,25 +57,33 @@ const OrderBuilder = () => {
             <div className="text-center mb-10">
               <span className="inline-flex items-center gap-1.5 text-primary font-medium mb-4 tracking-[0.2em] uppercase text-xs">
                 <Sparkles className="w-3.5 h-3.5" />
-                Sweet Studio
+                {t.eyebrow}
               </span>
               <h2 className="font-display text-4xl md:text-5xl text-foreground font-medium">
-                Design Your{" "}
-                <span className="font-script text-5xl md:text-6xl text-primary">Sweet Order</span>
+                {t.headingPrefix}
+                <span
+                  className={
+                    lang === "en"
+                      ? "font-script text-5xl md:text-6xl text-primary"
+                      : "font-he-script text-4xl md:text-5xl text-primary"
+                  }
+                >
+                  {t.headingHighlight}
+                </span>
               </h2>
               <p className="text-sm sm:text-base text-muted-foreground mt-3 font-light">
-                Pick a few details below and send your personalized request straight to WhatsApp
+                {t.subtitle}
               </p>
             </div>
 
             <div className="bg-card/90 backdrop-blur-sm rounded-3xl p-6 sm:p-10 border border-primary/20 shadow-xl shadow-primary/5">
               {/* Step 1: Occasion */}
               <div className="mb-7">
-                <label className="block text-xs font-medium uppercase tracking-[0.18em] text-taupe mb-3">
-                  1. What are we celebrating?
+                <label className="block text-xs font-medium uppercase tracking-[0.16em] text-taupe mb-3">
+                  {t.step1}
                 </label>
                 <div className="flex flex-wrap gap-2">
-                  {occasions.map((item) => (
+                  {t.occasions.map((item) => (
                     <button
                       key={item}
                       type="button"
@@ -103,11 +102,11 @@ const OrderBuilder = () => {
 
               {/* Step 2: Creation */}
               <div className="mb-7">
-                <label className="block text-xs font-medium uppercase tracking-[0.18em] text-taupe mb-3">
-                  2. What would you like?
+                <label className="block text-xs font-medium uppercase tracking-[0.16em] text-taupe mb-3">
+                  {t.step2}
                 </label>
                 <div className="flex flex-wrap gap-2">
-                  {creationTypes.map((item) => (
+                  {t.creations.map((item) => (
                     <button
                       key={item}
                       type="button"
@@ -128,16 +127,16 @@ const OrderBuilder = () => {
               <div className="mb-7">
                 <label
                   htmlFor="order-details"
-                  className="block text-xs font-medium uppercase tracking-[0.18em] text-taupe mb-3"
+                  className="block text-xs font-medium uppercase tracking-[0.16em] text-taupe mb-3"
                 >
-                  3. Theme, date, or guest count <span className="lowercase font-light">(optional)</span>
+                  {t.step3} <span className="lowercase font-light">{t.optional}</span>
                 </label>
                 <input
                   id="order-details"
                   type="text"
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
-                  placeholder="e.g., Pastel unicorn theme for 25 guests on May 14..."
+                  placeholder={t.placeholder}
                   className="w-full rounded-2xl bg-background border border-border/70 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary/50 transition-all"
                 />
               </div>
@@ -146,7 +145,7 @@ const OrderBuilder = () => {
               <div className="rounded-2xl bg-background/80 border border-border/50 p-4 mb-7">
                 <p className="text-[11px] uppercase tracking-widest text-muted-foreground mb-1.5 flex items-center gap-1.5">
                   <Heart className="w-3 h-3 text-primary fill-primary/40" />
-                  Your WhatsApp Message Preview
+                  {t.previewLabel}
                 </p>
                 <p className="text-xs sm:text-sm text-foreground/85 whitespace-pre-line font-light leading-relaxed">
                   {composedMessage}
@@ -179,7 +178,7 @@ const OrderBuilder = () => {
                   className="animate-shimmer w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-primary text-primary-foreground px-8 py-4 rounded-full font-medium tracking-wide hover:bg-primary/90 transition-all duration-500 shadow-lg shadow-primary/25 hover:shadow-xl hover:-translate-y-0.5 text-sm sm:text-base"
                 >
                   <Send className="w-4 h-4" />
-                  Send Sweet Request on WhatsApp
+                  {t.cta}
                 </a>
               </div>
             </div>

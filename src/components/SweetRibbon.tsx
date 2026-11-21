@@ -1,15 +1,15 @@
-const items = [
-  "Decorated Royal Icing Cookies",
-  "Custom Sculpted Cakes",
-  "Seasonal Baking Workshops",
-  "Hand-Piped with Love",
-  "Made Fresh to Order",
-  "Edible Art for Every Celebration",
-];
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getTranslations } from "@/i18n/translations";
 
 const SweetRibbon = () => {
+  const { lang } = useLanguage();
+  const items = getTranslations(lang).ribbon;
+
   return (
-    <div className="relative overflow-hidden bg-dusty-rose-light/60 border-y border-primary/15 py-3.5 select-none">
+    <div
+      dir="ltr"
+      className="relative overflow-hidden bg-dusty-rose-light/60 border-y border-primary/15 py-3.5 select-none"
+    >
       <div className="flex w-max animate-marquee">
         {[...items, ...items].map((text, idx) => (
           <div key={idx} className="flex items-center">

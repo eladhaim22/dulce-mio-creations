@@ -1,28 +1,30 @@
-import alfajoresGiftBox from "@/assets/alfajores-gift-box.jpeg";
-import cakeIcecreamBirthday from "@/assets/cake-icecream-birthday.jpeg";
-import cakeRaeFloral from "@/assets/cake-rae-floral.jpeg";
-import cakeRainbowClouds from "@/assets/cake-rainbow-clouds.jpeg";
-import cakeSlumberParty from "@/assets/cake-slumber-party.jpeg";
-import cakeVintageRibbon from "@/assets/cake-vintage-ribbon.jpeg";
-import coneCupcakesBox from "@/assets/cone-cupcakes-box.jpeg";
-import cookiesHalloweenSet from "@/assets/cookies-halloween-set.jpeg";
-import cookiesIcecreamCone from "@/assets/cookies-icecream-cone.jpeg";
-import cookiesPenguinsCozy from "@/assets/cookies-penguins-cozy.jpeg";
-import cookiesPortrait40 from "@/assets/cookies-portrait-40.jpeg";
-import cookiesPurimMasksBlack from "@/assets/cookies-purim-masks-black.jpeg";
-import cookiesPurimMasksColorful from "@/assets/cookies-purim-masks-colorful.jpeg";
-import cookiesSnowmanMarshmallow from "@/assets/cookies-snowman-marshmallow.jpeg";
-import cookiesSuperheroSet from "@/assets/cookies-superhero-set.jpeg";
-import daisyCupcakesCloseup from "@/assets/daisy-cupcakes-closeup.jpeg";
+import { useEffect, useState } from "react";
+import { ChevronLeft, ChevronRight, X, Heart, ZoomIn } from "lucide-react";
 import gallery1 from "@/assets/gallery-1.jpeg";
 import gallery2 from "@/assets/gallery-2.jpeg";
 import gallery3 from "@/assets/gallery-3.jpeg";
-import kitBirthdayPink from "@/assets/kit-birthday-pink.jpeg";
+import cakeRaeFloral from "@/assets/cake-rae-floral.jpeg";
+import cakeIcecreamBirthday from "@/assets/cake-icecream-birthday.jpeg";
+import cakeSlumberParty from "@/assets/cake-slumber-party.jpeg";
+import cakeVintageRibbon from "@/assets/cake-vintage-ribbon.jpeg";
+import cakeRainbowClouds from "@/assets/cake-rainbow-clouds.jpeg";
 import cakeAvengersBenyi from "@/assets/cake-avengers-benyi.jpeg";
+import coneCupcakesBox from "@/assets/cone-cupcakes-box.jpeg";
+import daisyCupcakesCloseup from "@/assets/daisy-cupcakes-closeup.jpeg";
+import alfajoresGiftBox from "@/assets/alfajores-gift-box.jpeg";
+import cookiesIcecreamCone from "@/assets/cookies-icecream-cone.jpeg";
+import cookiesPortrait40 from "@/assets/cookies-portrait-40.jpeg";
+import cookiesPurimMasksColorful from "@/assets/cookies-purim-masks-colorful.jpeg";
+import cookiesPurimMasksBlack from "@/assets/cookies-purim-masks-black.jpeg";
+import cookiesSnowmanMarshmallow from "@/assets/cookies-snowman-marshmallow.jpeg";
+import cookiesHalloweenSet from "@/assets/cookies-halloween-set.jpeg";
+import cookiesPenguinsCozy from "@/assets/cookies-penguins-cozy.jpeg";
+import cookiesSuperheroSet from "@/assets/cookies-superhero-set.jpeg";
 import kitDinoBoxes from "@/assets/kit-dino-boxes.jpeg";
+import kitBirthdayPink from "@/assets/kit-birthday-pink.jpeg";
 import { Reveal } from "@/components/Reveal";
-import { ChevronLeft, ChevronRight, Heart, X, ZoomIn } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { galleryTranslationsHe, getTranslations } from "@/i18n/translations";
 
 type Category = "All" | "Custom Cakes" | "Cookies & Cupcakes" | "Workshops & Kits";
 
@@ -202,6 +204,15 @@ const categories: Category[] = [
 const Gallery = () => {
   const [activeCategory, setActiveCategory] = useState<Category>("All");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const { lang } = useLanguage();
+  const t = getTranslations(lang).gallery;
+
+  const getItemText = (item: Creation) => {
+    if (lang === "he" && galleryTranslationsHe[item.title]) {
+      return galleryTranslationsHe[item.title];
+    }
+    return { title: item.title, subtitle: item.subtitle };
+  };
 
   const filtered =
     activeCategory === "All"
@@ -236,6 +247,7 @@ const Gallery = () => {
   }, [selectedIndex, filtered.length]);
 
   const currentItem = selectedIndex !== null ? filtered[selectedIndex] : null;
+  const currentText = currentItem ? getItemText(currentItem) : null;
 
   return (
     <section id="gallery" className="section-padding bg-card/50">
@@ -243,14 +255,21 @@ const Gallery = () => {
         <Reveal>
           <div className="text-center mb-10 sm:mb-12">
             <span className="inline-block text-primary font-medium mb-4 tracking-[0.2em] uppercase text-xs">
-              Gallery
+              {t.eyebrow}
             </span>
             <h2 className="font-display text-4xl md:text-5xl text-foreground font-medium">
-              My <span className="font-script text-5xl md:text-6xl text-primary">Creations</span>
+              {t.headingPrefix}
+              <span
+                className={
+                  lang === "en"
+                    ? "font-script text-5xl md:text-6xl text-primary"
+                    : "font-he-script text-4xl md:text-5xl text-primary"
+                }
+              >
+                {t.headingHighlight}
+              </span>
             </h2>
-            <p className="text-sm text-muted-foreground mt-3 font-light">
-              Tap any creation to view it up close
-            </p>
+            <p className="text-sm text-muted-foreground mt-3 font-light">{t.subtitle}</p>
 
             {/* Category filter pills */}
             <div className="flex flex-wrap justify-center gap-2 mt-7">
@@ -268,7 +287,7 @@ const Gallery = () => {
                       : "bg-background text-muted-foreground hover:text-foreground border border-border/60 hover:border-primary/40"
                   }`}
                 >
-                  {cat}
+                  {t.categories[cat]}
                 </button>
               ))}
             </div>
@@ -276,51 +295,55 @@ const Gallery = () => {
         </Reveal>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-          {filtered.map((image, index) => (
-            <Reveal key={image.title} delay={Math.min(index * 40, 240)}>
-              <button
-                type="button"
-                onClick={() => setSelectedIndex(index)}
-                className="group relative w-full h-[290px] sm:h-[330px] overflow-hidden rounded-2xl card-hover text-left focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border/30 bg-background"
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading="lazy"
-                  decoding="async"
-                  className={`w-full h-full object-cover ${
-                    image.position ?? "object-center"
-                  } transition-transform duration-700 group-hover:scale-105`}
-                />
+          {filtered.map((image, index) => {
+            const text = getItemText(image);
+            return (
+              <Reveal key={image.title} delay={Math.min(index * 40, 240)}>
+                <button
+                  type="button"
+                  onClick={() => setSelectedIndex(index)}
+                  className="group relative w-full h-[290px] sm:h-[330px] overflow-hidden rounded-2xl card-hover text-start focus:outline-none focus:ring-2 focus:ring-primary/50 border border-border/30 bg-background"
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className={`w-full h-full object-cover ${
+                      image.position ?? "object-center"
+                    } transition-transform duration-700 group-hover:scale-105`}
+                  />
 
-                {/* Top category pill */}
-                <span className="absolute top-3.5 left-3.5 px-3 py-1 rounded-full bg-background/90 backdrop-blur-md text-[11px] font-medium text-foreground border border-border/40 shadow-sm">
-                  {image.category}
-                </span>
-
-                {/* Zoom icon */}
-                <span className="absolute top-3.5 right-3.5 w-8 h-8 rounded-full bg-background/90 backdrop-blur-md flex items-center justify-center text-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-sm">
-                  <ZoomIn className="w-4 h-4 text-primary" />
-                </span>
-
-                {/* Gradient & caption */}
-                <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/80 via-warm-brown/15 to-transparent opacity-85 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
-                  <span className="font-display text-xl text-white tracking-wide leading-tight">
-                    {image.title}
+                  {/* Top category pill */}
+                  <span className="absolute top-3.5 start-3.5 px-3 py-1 rounded-full bg-background/90 backdrop-blur-md text-[11px] font-medium text-foreground border border-border/40 shadow-sm">
+                    {t.categories[image.category]}
                   </span>
-                  <span className="text-xs text-white/85 font-light mt-1">
-                    {image.subtitle}
+
+                  {/* Zoom icon */}
+                  <span className="absolute top-3.5 end-3.5 w-8 h-8 rounded-full bg-background/90 backdrop-blur-md flex items-center justify-center text-foreground opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100 shadow-sm">
+                    <ZoomIn className="w-4 h-4 text-primary" />
                   </span>
-                </div>
-              </button>
-            </Reveal>
-          ))}
+
+                  {/* Gradient & caption */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/80 via-warm-brown/15 to-transparent opacity-85 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-5">
+                    <span className="font-display text-xl text-white tracking-wide leading-tight">
+                      {text.title}
+                    </span>
+                    <span className="text-xs text-white/85 font-light mt-1">
+                      {text.subtitle}
+                    </span>
+                  </div>
+                </button>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
 
       {/* Lightbox modal */}
-      {currentItem && selectedIndex !== null && (
+      {currentItem && currentText && selectedIndex !== null && (
         <div
+          dir="ltr"
           className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4"
           onClick={() => setSelectedIndex(null)}
         >
@@ -330,7 +353,7 @@ const Gallery = () => {
           >
             <div className="w-full flex items-center justify-between text-white/80 mb-3 px-1">
               <span className="text-xs tracking-widest uppercase">
-                {selectedIndex + 1} / {filtered.length} • {currentItem.category}
+                {selectedIndex + 1} / {filtered.length} • {t.categories[currentItem.category]}
               </span>
               <button
                 type="button"
@@ -368,23 +391,23 @@ const Gallery = () => {
               </button>
             </div>
 
-            <div className="mt-5 text-center">
+            <div dir={lang === "he" ? "rtl" : "ltr"} className="mt-5 text-center">
               <p className="font-display text-2xl text-white tracking-wide">
-                {currentItem.title}
+                {currentText.title}
               </p>
               <p className="text-sm text-white/75 font-light mt-1 mb-4">
-                {currentItem.subtitle}
+                {currentText.subtitle}
               </p>
               <a
                 href={`https://wa.me/972509052322?text=${encodeURIComponent(
-                  `Hi Dulce Mío! I saw "${currentItem.title}" in your gallery and would love to order something similar.`
+                  t.orderSimilarMessage(currentText.title)
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2.5 rounded-full text-sm font-medium hover:bg-primary/90 transition-all shadow-lg"
               >
                 <Heart className="w-4 h-4 fill-current" />
-                Order Something Similar
+                {t.orderSimilar}
               </a>
             </div>
           </div>

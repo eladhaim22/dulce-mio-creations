@@ -102,6 +102,25 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-wide;
   }
+
+  html[dir="rtl"] body {
+    font-family: 'Assistant', 'Lato', sans-serif;
+  }
+
+  html[dir="rtl"] h1,
+  html[dir="rtl"] h2,
+  html[dir="rtl"] h3,
+  html[dir="rtl"] h4,
+  html[dir="rtl"] h5,
+  html[dir="rtl"] h6,
+  html[dir="rtl"] .font-display {
+    font-family: 'Bellefair', 'Cormorant Garamond', serif;
+    letter-spacing: normal;
+  }
+
+  .font-he-script {
+    font-family: 'Gveret Levin', cursive;
+  }
 }
 
 @layer components {

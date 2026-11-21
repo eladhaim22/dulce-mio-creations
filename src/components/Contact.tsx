@@ -1,13 +1,18 @@
 import { Phone, Mail, Instagram, Facebook, MessageCircle, Copy } from "lucide-react";
 import { toast } from "sonner";
 import { Reveal } from "@/components/Reveal";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getTranslations } from "@/i18n/translations";
 
 const Contact = () => {
-  const copyToClipboard = (e: React.MouseEvent, text: string, label: string) => {
+  const { lang } = useLanguage();
+  const t = getTranslations(lang).contact;
+
+  const copyToClipboard = (e: React.MouseEvent, text: string, successMessage: string) => {
     e.preventDefault();
     e.stopPropagation();
     navigator.clipboard.writeText(text);
-    toast.success(`${label} copied to clipboard!`);
+    toast.success(successMessage);
   };
 
   return (
@@ -16,14 +21,22 @@ const Contact = () => {
         <Reveal>
           <div className="max-w-2xl mx-auto text-center">
             <span className="inline-block text-primary font-medium mb-4 tracking-[0.2em] uppercase text-xs">
-              Contact
+              {t.eyebrow}
             </span>
             <h2 className="font-display text-4xl md:text-5xl text-foreground mb-5 font-medium">
-              Let's Talk About Your{" "}
-              <span className="font-script text-5xl md:text-6xl text-primary">Order</span>
+              {t.headingPrefix}
+              <span
+                className={
+                  lang === "en"
+                    ? "font-script text-5xl md:text-6xl text-primary"
+                    : "font-he-script text-4xl md:text-5xl text-primary"
+                }
+              >
+                {t.headingHighlight}
+              </span>
             </h2>
             <p className="text-base sm:text-lg text-muted-foreground mb-12 font-light">
-              Ready to sweeten your next event? Contact me and let's create something special together.
+              {t.subtitle}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-10 sm:mb-12">
@@ -35,16 +48,21 @@ const Contact = () => {
                   <div className="w-12 sm:w-14 h-12 sm:h-14 bg-dusty-rose-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shrink-0">
                     <Phone className="w-5 sm:w-6 h-5 sm:h-6 text-primary" />
                   </div>
-                  <div className="text-left">
-                    <p className="text-xs text-muted-foreground tracking-wide uppercase">Phone</p>
-                    <p className="font-display text-base sm:text-lg text-foreground font-medium">
+                  <div className="text-start">
+                    <p className="text-xs text-muted-foreground tracking-wide uppercase">
+                      {t.phoneLabel}
+                    </p>
+                    <p
+                      dir="ltr"
+                      className="font-display text-base sm:text-lg text-foreground font-medium"
+                    >
                       050-905-2322
                     </p>
                   </div>
                 </div>
                 <button
                   type="button"
-                  onClick={(e) => copyToClipboard(e, "050-905-2322", "Phone number")}
+                  onClick={(e) => copyToClipboard(e, "050-905-2322", t.copiedPhone)}
                   className="p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors shrink-0"
                   aria-label="Copy phone number"
                   title="Copy phone number"
@@ -61,16 +79,23 @@ const Contact = () => {
                   <div className="w-12 sm:w-14 h-12 sm:h-14 bg-blush-light rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shrink-0">
                     <Mail className="w-5 sm:w-6 h-5 sm:h-6 text-taupe" />
                   </div>
-                  <div className="text-left min-w-0">
-                    <p className="text-xs text-muted-foreground tracking-wide uppercase">Email</p>
-                    <p className="font-display text-sm sm:text-base text-foreground font-medium truncate">
+                  <div className="text-start min-w-0">
+                    <p className="text-xs text-muted-foreground tracking-wide uppercase">
+                      {t.emailLabel}
+                    </p>
+                    <p
+                      dir="ltr"
+                      className="font-display text-sm sm:text-base text-foreground font-medium truncate"
+                    >
                       dulcemiocookies@gmail.com
                     </p>
                   </div>
                 </div>
                 <button
                   type="button"
-                  onClick={(e) => copyToClipboard(e, "dulcemiocookies@gmail.com", "Email")}
+                  onClick={(e) =>
+                    copyToClipboard(e, "dulcemiocookies@gmail.com", t.copiedEmail)
+                  }
                   className="p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors shrink-0"
                   aria-label="Copy email address"
                   title="Copy email address"

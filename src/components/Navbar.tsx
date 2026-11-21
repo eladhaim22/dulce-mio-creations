@@ -1,17 +1,21 @@
 import { useEffect, useState } from "react";
-import { Menu, X, Heart } from "lucide-react";
-
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#services", label: "Services" },
-  { href: "#gallery", label: "Gallery" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
-];
+import { Menu, X, Heart, Globe } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { getTranslations } from "@/i18n/translations";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, toggleLang } = useLanguage();
+  const t = getTranslations(lang);
+
+  const navLinks = [
+    { href: "#about", label: t.nav.about },
+    { href: "#services", label: t.nav.services },
+    { href: "#gallery", label: t.nav.gallery },
+    { href: "#faq", label: t.nav.faq },
+    { href: "#contact", label: t.nav.contact },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -38,7 +42,7 @@ const Navbar = () => {
           </a>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-7 lg:gap-9">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             {navLinks.map((link) => (
               <a
                 key={link.href}
@@ -48,23 +52,46 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
+
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label={t.nav.toggleAria}
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-border/70 bg-card/80 text-xs font-medium text-foreground hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <Globe className="w-3.5 h-3.5 text-primary" />
+              <span>{t.nav.toggleLabel}</span>
+            </button>
+
             <a
               href="#order"
               className="inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-5 py-2 rounded-full text-xs font-medium tracking-wider uppercase hover:bg-primary/90 transition-all duration-300 hover:shadow-md hover:-translate-y-0.5"
             >
               <Heart className="w-3.5 h-3.5 fill-current" />
-              Order Now
+              {t.nav.orderNow}
             </a>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 text-foreground rounded-full hover:bg-primary/10 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
+          {/* Mobile controls */}
+          <div className="flex items-center gap-2 md:hidden">
+            <button
+              type="button"
+              onClick={toggleLang}
+              aria-label={t.nav.toggleAria}
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-full border border-border/70 bg-card/80 text-xs font-medium text-foreground hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <Globe className="w-3.5 h-3.5 text-primary" />
+              <span>{t.nav.toggleLabel}</span>
+            </button>
+
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-foreground rounded-full hover:bg-primary/10 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile nav */}
@@ -90,7 +117,7 @@ const Navbar = () => {
               className="mt-2 inline-flex items-center justify-center gap-2 w-full bg-primary text-primary-foreground py-2.5 rounded-full text-sm font-medium tracking-wide"
             >
               <Heart className="w-4 h-4 fill-current" />
-              Order Now
+              {t.nav.orderNow}
             </a>
           </div>
         </div>
