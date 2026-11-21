@@ -1,29 +1,64 @@
-import { useState } from "react";
-import { Heart, Sparkles, ArrowDown } from "lucide-react";
-import gallery1 from "@/assets/gallery-1.jpeg";
-import gallery5 from "@/assets/gallery-5.jpeg";
-import heroCookies from "@/assets/hero-cookies.jpg";
+import { useRef, useState } from "react";
+import { Heart, Sparkles, ArrowDown, ChevronLeft, ChevronRight } from "lucide-react";
+import cakeVintageRibbon from "@/assets/cake-vintage-ribbon.jpeg";
+import coneCupcakesBox from "@/assets/cone-cupcakes-box.jpeg";
+import cookiesIcecreamCone from "@/assets/cookies-icecream-cone.jpeg";
+import alfajoresGiftBox from "@/assets/alfajores-gift-box.jpeg";
+import cakeRainbowClouds from "@/assets/cake-rainbow-clouds.jpeg";
 
 const featuredCreations = [
   {
-    src: gallery1,
-    alt: "Handcrafted Gremlin popcorn cake by Dulce Mío",
-    label: "Custom Sculpted Cakes",
+    src: cakeVintageRibbon,
+    alt: "Two-tier vintage buttercream birthday cake with pink satin ribbons",
+    label: "Vintage Ribbon Cakes",
   },
   {
-    src: gallery5,
-    alt: "Hand-piped unicorn decorated cookies",
+    src: coneCupcakesBox,
+    alt: "Pastel swirl ice-cream cone cupcakes in pink gift box",
+    label: "Pastel Cone Cupcakes",
+  },
+  {
+    src: cookiesIcecreamCone,
+    alt: "Hand-piped pastel blue ice-cream cone royal icing cookie",
     label: "Royal Icing Cookies",
   },
   {
-    src: heroCookies,
-    alt: "Artisanal decorated cookies assortment",
-    label: "Made Fresh to Order",
+    src: alfajoresGiftBox,
+    alt: "Artisanal coconut alfajores in a Baked with Love gift box",
+    label: "Artisanal Gift Boxes",
+  },
+  {
+    src: cakeRainbowClouds,
+    alt: "Rainbow and smiling clouds 3rd birthday cake",
+    label: "Custom Birthday Cakes",
   },
 ];
 
 const Hero = () => {
   const [activeSlide, setActiveSlide] = useState(0);
+  const pointerStartX = useRef<number | null>(null);
+
+  const handlePrev = () => {
+    setActiveSlide((prev) => (prev - 1 + featuredCreations.length) % featuredCreations.length);
+  };
+
+  const handleNext = () => {
+    setActiveSlide((prev) => (prev + 1) % featuredCreations.length);
+  };
+
+  const onPointerDown = (e: React.PointerEvent) => {
+    pointerStartX.current = e.clientX;
+  };
+
+  const onPointerUp = (e: React.PointerEvent) => {
+    if (pointerStartX.current === null) return;
+    const diff = e.clientX - pointerStartX.current;
+    pointerStartX.current = null;
+    if (Math.abs(diff) > 35) {
+      if (diff < 0) handleNext();
+      else handlePrev();
+    }
+  };
 
   return (
     <section className="relative min-h-[88vh] lg:min-h-[92vh] flex items-center overflow-hidden py-10 lg:py-0">
@@ -37,9 +72,7 @@ const Hero = () => {
         className="absolute bottom-16 right-4 lg:right-12 w-44 lg:w-72 h-44 lg:h-72 bg-blush/40 rounded-full blur-3xl animate-float"
         style={{ animationDelay: "3s" }}
       />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sage-light/30 rounded-full blur-3xl pointer-events-none"
-      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-sage-light/30 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -85,7 +118,7 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Arch-framed interactive showcase */}
+          {/* Arch-framed swipeable carousel */}
           <div
             className="lg:col-span-6 relative animate-fade-up order-1 lg:order-2 flex justify-center"
             style={{ animationDelay: "0.2s" }}
@@ -109,58 +142,89 @@ const Hero = () => {
                 <Heart className="absolute w-4 h-4 text-primary fill-primary/80" />
               </div>
 
-              {/* Arch frame */}
-              <div className="relative rounded-t-[10rem] rounded-b-[2rem] overflow-hidden shadow-2xl shadow-warm-brown/15 ring-1 ring-primary/25 ring-offset-4 ring-offset-background bg-card">
-                <div className="relative h-[330px] sm:h-[430px] lg:h-[510px] w-full">
-                  {featuredCreations.map((item, idx) => (
-                    <img
-                      key={item.label}
-                      src={item.src}
-                      alt={item.alt}
-                      fetchPriority={idx === 0 ? "high" : "auto"}
-                      decoding="async"
-                      className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-                        activeSlide === idx
-                          ? "opacity-100 scale-100"
-                          : "opacity-0 scale-105 pointer-events-none"
-                      }`}
-                    />
-                  ))}
-                  <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/45 via-transparent to-transparent" />
-
-                  {/* Bottom caption + switcher */}
-                  <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-2">
-                    <span className="px-3.5 py-1.5 rounded-full bg-background/85 backdrop-blur-md text-xs font-medium text-foreground shadow-sm border border-border/40">
-                      {featuredCreations[activeSlide].label}
-                    </span>
-
-                    <div className="flex items-center gap-1.5 bg-background/80 backdrop-blur-md px-2.5 py-1.5 rounded-full border border-border/40">
+              {/* Arch + floating badge wrapper */}
+              <div className="relative">
+                {/* Swipeable arch frame */}
+                <div
+                  onPointerDown={onPointerDown}
+                  onPointerUp={onPointerUp}
+                  className="relative rounded-t-[10rem] rounded-b-[2rem] overflow-hidden shadow-2xl shadow-warm-brown/15 ring-1 ring-primary/25 ring-offset-4 ring-offset-background bg-card touch-pan-y select-none cursor-grab active:cursor-grabbing"
+                >
+                  <div className="relative h-[340px] sm:h-[440px] lg:h-[520px] w-full overflow-hidden">
+                    {/* Horizontal sliding track */}
+                    <div
+                      className="flex h-full transition-transform duration-500 ease-out"
+                      style={{ transform: `translateX(-${activeSlide * 100}%)` }}
+                    >
                       {featuredCreations.map((item, idx) => (
-                        <button
-                          key={item.label}
-                          type="button"
-                          onClick={() => setActiveSlide(idx)}
-                          aria-label={`Show ${item.label}`}
-                          className={`h-2 rounded-full transition-all duration-300 ${
-                            activeSlide === idx
-                              ? "w-6 bg-primary"
-                              : "w-2 bg-primary/30 hover:bg-primary/60"
-                          }`}
-                        />
+                        <div key={item.label} className="w-full h-full shrink-0 relative">
+                          <img
+                            src={item.src}
+                            alt={item.alt}
+                            fetchPriority={idx === 0 ? "high" : "auto"}
+                            decoding="async"
+                            draggable={false}
+                            className="w-full h-full object-cover object-center"
+                          />
+                        </div>
                       ))}
                     </div>
+
+                    <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/35 via-transparent to-transparent pointer-events-none" />
+
+                    {/* Easy left/right swipe arrows */}
+                    <button
+                      type="button"
+                      onClick={handlePrev}
+                      aria-label="Previous creation"
+                      className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/85 backdrop-blur-md text-foreground hover:bg-background hover:text-primary shadow-md border border-border/40 flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={handleNext}
+                      aria-label="Next creation"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-background/85 backdrop-blur-md text-foreground hover:bg-background hover:text-primary shadow-md border border-border/40 flex items-center justify-center transition-all hover:scale-105"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
                   </div>
+                </div>
+
+                {/* Floating badge */}
+                <div className="absolute -bottom-4 left-2 sm:-left-6 z-20 bg-card/95 backdrop-blur-md px-4 py-2.5 sm:px-5 sm:py-3.5 rounded-2xl shadow-xl animate-float border border-primary/20">
+                  <p className="font-script text-xl sm:text-2xl text-primary leading-none">
+                    100% Handmade
+                  </p>
+                  <p className="text-[11px] text-muted-foreground tracking-wider uppercase mt-0.5">
+                    Freshly Baked to Order
+                  </p>
                 </div>
               </div>
 
-              {/* Floating badge */}
-              <div className="absolute -bottom-4 left-2 sm:-left-6 bg-card/95 backdrop-blur-md px-4 py-2.5 sm:px-5 sm:py-3.5 rounded-2xl shadow-xl animate-float border border-primary/20">
-                <p className="font-script text-xl sm:text-2xl text-primary leading-none">
-                  100% Handmade
-                </p>
-                <p className="text-[11px] text-muted-foreground tracking-wider uppercase mt-0.5">
-                  Freshly Baked to Order
-                </p>
+              {/* Caption & dots cleanly below the arch */}
+              <div className="mt-7 flex items-center justify-center gap-3 px-2">
+                <span className="px-3.5 py-1 rounded-full bg-card/90 text-xs font-medium text-foreground shadow-sm border border-border/50">
+                  {featuredCreations[activeSlide].label}
+                </span>
+
+                <div className="flex items-center gap-1.5 bg-card/90 px-2.5 py-1.5 rounded-full border border-border/50">
+                  {featuredCreations.map((item, idx) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => setActiveSlide(idx)}
+                      aria-label={`Show ${item.label}`}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        activeSlide === idx
+                          ? "w-6 bg-primary"
+                          : "w-2 bg-primary/30 hover:bg-primary/60"
+                      }`}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
           </div>
