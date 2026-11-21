@@ -49,6 +49,8 @@ const Hero = () => {
               <img 
                 src={gallery1} 
                 alt="Handcrafted Gremlin cake by Dulce Mío"
+                fetchPriority="high"
+                decoding="async"
                 className="w-full h-[300px] sm:h-[400px] lg:h-[520px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-warm-brown/20 to-transparent" />
